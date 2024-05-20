@@ -28,42 +28,39 @@ class MySavedListViewController: UIViewController {
         
         MySavedListView.backgroundColor = .black
         
-        titleLabel.text = "저장한 콘텐츠 목록"
-        titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 30)
-        titleLabel.textAlignment = .center
+        labelUiDesign(labelName: titleLabel, labelText: "저장한 콘텐츠 목록", labellines: 0, labelTextColor: .white, fontSize: 30, textAlignmnet: .center)
+
+        labelUiDesign(labelName: firstExplainLabel, labelText: "'나만의 자동 저장'기능", labellines: 0, labelTextColor: .white, fontSize: 20, textAlignmnet: .center)
         
-        firstExplainLabel.text =
-        "'나만의 자동 저장'기능"
-        firstExplainLabel.textColor = .white
-        firstExplainLabel.font = .systemFont(ofSize: 20)
-        firstExplainLabel.textAlignment = .center
+        labelUiDesign(labelName: secondExplainLabel, labelText: "취향에 맞는 영화와 시리즈를 자동으로 저장해 드립니다.\n디바이스에 언제나 시정할 콘텐츠가 준비되니 지루할 틈이\n없어요", labellines: 0, labelTextColor: .gray, fontSize: 14, textAlignmnet: .center)
+    
+        imageViewDesign(imageViewName: savedImageView, imageName: "dummy", contentMode: .center)
+       
+        buttonUiDesign(buttonName: settingButton, buttonTitle: "설정하기", buttonBackgroundColor: UIColor.systemBlue, titleColor: UIColor.white)
+
+        buttonUiDesign(buttonName: checkSaveableContentButton, buttonTitle: "저장 가능한 콘텐츠 살펴보기", buttonBackgroundColor: UIColor.white, titleColor: UIColor.black)
         
-        secondExplainLabel.text =
-        "취향에 맞는 영화와 시리즈를 자동으로 저장해 드립니다.\n디바이스에 언제나 시정할 콘텐츠가 준비되니 지루할 틈이\n없어요"
-        secondExplainLabel.numberOfLines = 0
-        secondExplainLabel.textColor = .gray
-        secondExplainLabel.font = .systemFont(ofSize: 14)
-        secondExplainLabel.textAlignment = .center
-        
-        savedImageView.image = UIImage(named: "dummy")
-        savedImageView.contentMode = .scaleToFill
-        savedImageView.layer.cornerRadius = 7
-        
-        settingButton.setTitle("설정하기", for: .normal)
-        settingButton.backgroundColor = UIColor.systemBlue
-        settingButton.setTitleColor(UIColor.white, for: .normal)
-        settingButton.layer.cornerRadius = 7
-        
-        checkSaveableContentButton.setTitle("저장 가능한 콘텐츠 살펴보기", for: .normal)
-        checkSaveableContentButton.backgroundColor = UIColor.white
-        checkSaveableContentButton.setTitleColor(UIColor.black, for: .normal)
-        checkSaveableContentButton.layer.cornerRadius = 7
+    }
+    func labelUiDesign(labelName:UILabel, labelText: String, labellines line:Int, labelTextColor color:UIColor, fontSize size:Int, textAlignmnet:NSTextAlignment) {
+        labelName.text =
+        "\(labelText)"
+        labelName.numberOfLines = line
+        labelName.textColor = color
+        labelName.font = .systemFont(ofSize: CGFloat(size))
+        labelName.textAlignment = textAlignmnet
+    }
+    func imageViewDesign(imageViewName name:UIImageView, imageName:String, contentMode:UIView.ContentMode ) {
+        name.image = UIImage(named: imageName)
+        name.contentMode = contentMode
+        name.layer.cornerRadius = 7
+    }
+    func buttonUiDesign(buttonName name:UIButton, buttonTitle title:String, buttonBackgroundColor bgColor:UIColor, titleColor:UIColor) {
+        name.setTitle(title, for: .normal)
+        name.backgroundColor = bgColor
+        name.setTitleColor(titleColor, for: .normal)
+        name.layer.cornerRadius = 7
         
         
     }
-    
-
-    
 
 }

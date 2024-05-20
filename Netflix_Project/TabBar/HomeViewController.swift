@@ -4,6 +4,13 @@
 //
 //  Created by 김윤우 on 5/16/24.
 //
+//        let playSymbols = "􀊄"
+        
+        //sfsymbols + text 같이 사용법 찾기
+//        nowPlayButton.setTitle("\(playSymbols)" + "재생", for: .normal)
+//        nowPlayButton.setTitleColor(.black, for: .normal)
+//        nowPlayButton.backgroundColor = .white
+//        nowPlayButton.layer.cornerRadius = 3
 
 import UIKit
 
@@ -25,57 +32,91 @@ class HomeViewController: UIViewController {
     
     @IBOutlet var myFavoriteButton: UIButton!
     
+    @IBOutlet var newEpisodeImage: UIImageView!
+    
+    @IBOutlet var topTenImage: UIImageView!
+    @IBOutlet var nowPlayingImage: UIImageView!
+    
+    
+    var movies = ["극한직업", "도둑들", "명량", "베테랑", "부산행", "신과함께인과연", "신과함께죄와벌", "아바타", "알라딘", "암살", "어벤져스엔드게임", "왕의남자"]
+    
+    var imageBagge = ["","blue", "top10badge", "wordmark"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         homeView.backgroundColor = .black
-        
-        userIdLabel.text = "김윤우님"
-        userIdLabel.textColor = .white
-        userIdLabel.font = .systemFont(ofSize: 30)
-        userIdLabel.textAlignment = .center
+        labelUiDesign(labelName: userIdLabel, labelText: "김윤우님", labelTextColor: .white, labelFontSize: 25, textAlignment: .center)
         
         movieView.image = UIImage(named: "명량")
         movieView.contentMode = .scaleToFill
         movieView.layer.cornerRadius = 7
         
-        describeMovieLabel.text = "응원하고픈 흥미진진 사극 전투"
-        describeMovieLabel.textAlignment = .center
-        describeMovieLabel.textColor = .white
-        describeMovieLabel.font = .systemFont(ofSize: 13)
+        labelUiDesign(labelName: describeMovieLabel, labelText: "응원하고픈 흥미진진 사극 전투", labelTextColor: .white, labelFontSize: 15, textAlignment: .center)
+        labelUiDesign(labelName: suggestContentsLabel , labelText: "지금 뜨는 콘텐츠", labelTextColor: .white, labelFontSize: 13, textAlignment: .left)
         
-//        let playSymbols = "􀊄"
+        playButton(buttonName: nowPlayButton, buttonImage: "play", backgroundColor: .white, buttonTitle: "재생", tintColor: .black)
         
-        //sfsymbols + text 같이 사용법 찾기
-//        nowPlayButton.setTitle("\(playSymbols)" + "재생", for: .normal)
-//        nowPlayButton.setTitleColor(.black, for: .normal)
-//        nowPlayButton.backgroundColor = .white
-//        nowPlayButton.layer.cornerRadius = 3
-        nowPlayButton.setImage(UIImage(named: "play"), for: .normal)
-        nowPlayButton.backgroundColor = .white
-        nowPlayButton.setTitle("재생", for: .normal)
-        nowPlayButton.setTitleColor(.black, for: .normal)
-        nowPlayButton.layer.cornerRadius = 7
+        favoriteButton(button: myFavoriteButton, buttonTitle: "+ 내가 찜한 리스트", buttonTitleColor: .white)
         
-        myFavoriteButton.setTitle("+ 내가 찜한 리스트", for: .normal)
-        myFavoriteButton.setTitleColor(.white, for: .normal)
-        myFavoriteButton.backgroundColor = .darkGray
-        myFavoriteButton.layer.cornerRadius = 7
+        buttonUIDesign(imageView: suggestFirstImageView, imageName: "육사오")
+        buttonUIDesign(imageView: suggestSecondImageView, imageName: "범죄도시3")
+        buttonUIDesign(imageView: suggestThirdImageView, imageName: "스즈메의문단속")
         
-        suggestContentsLabel.text = "지금 뜨는 콘텐츠"
-        suggestContentsLabel.textColor = .white
-        suggestContentsLabel.textAlignment = .left
+        buttonUIDesign(imageView: newEpisodeImage, imageName: "blue")
+        buttonUIDesign(imageView: topTenImage, imageName: "top10badge")
+        buttonUIDesign(imageView: nowPlayingImage, imageName: "wordmark")
         
-        suggestFirstImageView.image = UIImage(named: "육사오")
-        suggestFirstImageView.layer.cornerRadius = 7
-        suggestSecondImageView.image = UIImage(named: "범죄도시3")
-        suggestSecondImageView.layer.cornerRadius = 7
-        suggestThirdImageView.image = UIImage(named: "스즈메의문단속")
-        suggestThirdImageView.layer.cornerRadius = 7
+        
     }
     
+    @IBAction func playButtonTapped(_ sender: UIButton) {
+        let randomNumber = Int.random(in: 0...11)
+        print(randomNumber)
+        movieView.image = UIImage(named: "\(movies[randomNumber])")
+        describeMovieLabel.text = ""
+        
+        var randomBaggeNumber = Int.random(in: 0...3)
+        newEpisodeImage.image = UIImage(named: "\(imageBagge[randomBaggeNumber])")
+        
+        randomBaggeNumber = Int.random(in: 0...3)
+        
+        topTenImage.image = UIImage(named: "\(imageBagge[randomBaggeNumber])")
+        randomBaggeNumber = Int.random(in: 0...3)
+        
+        nowPlayingImage.image = UIImage(named: "\(imageBagge[randomBaggeNumber])")
+        randomBaggeNumber = Int.random(in: 0...3)
+        
+        
+        
+    }
+    func buttonUIDesign( imageView:UIImageView ,imageName image:String) {
+        imageView.image = UIImage(named: "\(image)")
+        imageView.layer.cornerRadius = 7
+        
+    }
+    func playButton(buttonName:UIButton, buttonImage:String, backgroundColor:UIColor, buttonTitle title:String, tintColor:UIColor ) {
+        
+        buttonName.setImage(UIImage(named: "\(buttonImage)"), for: .normal)
+        buttonName.backgroundColor = backgroundColor
+        buttonName.setTitle("\(title)", for: .normal)
+        buttonName.tintColor = tintColor
+        buttonName.layer.cornerRadius = 7
+    }
     
-
-   
-
+    func favoriteButton(button:UIButton, buttonTitle title:String, buttonTitleColor color:UIColor) {
+        button.setTitle("\(title)", for: .normal)
+        button.setTitleColor(color, for: .normal)
+        button.backgroundColor = .darkGray
+        button.layer.cornerRadius = 7
+    }
+    
+    func labelUiDesign(labelName:UILabel, labelText text:String, labelTextColor color:UIColor, labelFontSize size:Int, textAlignment:NSTextAlignment ) {
+        labelName.text = "\(text)"
+        labelName.textColor = color
+        labelName.textAlignment = textAlignment
+        labelName.font = .systemFont(ofSize: CGFloat(size))
+    }
+    
 }

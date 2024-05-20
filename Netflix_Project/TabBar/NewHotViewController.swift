@@ -15,6 +15,13 @@ class NewHotViewController: UIViewController {
     
     @IBOutlet var searchTextField: UITextField!
     
+    // plain < ios15+
+    // default < legacy
+    // 즉, default 스타일을 다루는 버튼 코드와 plain 스타일을 다루는 버튼 코드가 다름
+    
+    //Image Rendering Mode: templete vs original
+    // Asset 인스펙터에서 Original로 설정가능
+    // tint color 안에 있는 색 채우기
     @IBOutlet var toBeReleasedButton: UIButton!
     @IBOutlet var toBeReleasedButtonImage: UIImageView!
     
@@ -32,48 +39,74 @@ class NewHotViewController: UIViewController {
         
         newHotView.backgroundColor = .black
         
-        titleLabel.text = "NEW & HOT 검색"
-        titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 30)
-        titleLabel.textAlignment = .center
         
-        searchTextField.backgroundColor = .darkGray
-        searchTextField.placeholder = "게임, 시리즈, 영화를 검색하세요."
+        labelUiDesign(labelName: titleLabel, labelText: "NEW & HOT 검색", textColor: .white, fontSize: 30)
         
-//        toBeReleasedButtonImage.image = UIImage(named: "blue")
-        toBeReleasedButton.setImage(UIImage(named: "blue"), for: .normal)
-        toBeReleasedButton.setTitleColor(UIColor.black, for: .normal)
-        toBeReleasedButton.backgroundColor = .white
-        toBeReleasedButton.layer.cornerRadius = 10
-        toBeReleasedButton.setTitle("공개 예정", for: .normal)
-     
+        labelUiDesign(labelName: firstResultLabel, labelText: "이런! 찾으시는 작품이 없습니다.", textColor: .white, fontSize: 25)
+        labelUiDesign(labelName: secondResultLabel, labelText: "다른 영화, 시리즈, 배우 , 감독 또는 장르를 검색해보세요.", textColor: .darkGray, fontSize: 13)
         
-        popularButton.setImage(UIImage(named: "turquoise"), for: .normal)
-        popularButton.setTitleColor(UIColor.white, for: .normal)
-        popularButton.setTitle("모두의 인기 콘텐츠", for: .normal)
+        textFieldUiDesign(textFieldName: searchTextField, textFieldBackgroundColor: .darkGray, placeholderTextColor: .white, placehorderText: "게임, 시리즈, 영화를 검색하세요.")
         
-        topSeriesButton.setImage(UIImage(named: "pink"), for: .normal)
-        topSeriesButton.setTitleColor(UIColor.white, for: .normal)
-        topSeriesButton.layer.cornerRadius = 10
-        topSeriesButton.setTitle("TOP 10 시리즈", for: .normal)
-        
-        firstResultLabel.text =
-        "이런! 찾으시는 작품이 없습니다."
-        firstResultLabel.textColor = .white
-        firstResultLabel.font = .systemFont(ofSize: 25)
-        firstResultLabel.textAlignment = .center
-        
-        secondResultLabel.text =
-        "다른 영화, 시리즈, 배우 , 감독 또는 장르를 검색해보세요."
-        secondResultLabel.textColor = .darkGray
-        secondResultLabel.font = .systemFont(ofSize: 13)
-        secondResultLabel.textAlignment = .center
-        
-//        toBeReleasedButton.contentHorizontalAlignment = .right
+        buttonUiDesign(buttonName: toBeReleasedButton, imageName: "blue", buttonTitleColor: UIColor.black, buttonHighlightedColor: .black, buttonTitle: "공개 예정")
+        buttonUiDesign(buttonName: popularButton, imageName: "turquoise", buttonTitleColor: UIColor.black, buttonHighlightedColor: .black, buttonTitle: "모두의 인기 콘텐츠")
+        buttonUiDesign(buttonName: topSeriesButton, imageName: "pink", buttonTitleColor: UIColor.black, buttonHighlightedColor: .black, buttonTitle: "TOP 10 시리즈")
+
         
     }
     
-
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        
+        switch sender.tag {
+        case 0:
+            
+            popularButton.backgroundColor = .black
+            popularButton.setTitleColor(.white, for: .normal)
+            topSeriesButton.backgroundColor = .black
+            topSeriesButton.setTitleColor(.white, for: .normal)
+        case 1:
+            toBeReleasedButton.backgroundColor = .black
+            toBeReleasedButton.setTitleColor(.white, for: .normal)
+            topSeriesButton.backgroundColor = .black
+            topSeriesButton.setTitleColor(.white, for: .normal)
+            labelUiDesign(labelName: firstResultLabel, labelText: "준비중입니다!", textColor: .white, fontSize: 25)
+            labelUiDesign(labelName: secondResultLabel, labelText: "다른 영화, 시리즈, 배우 , 감독 또는 장르를 검색해보세요.", textColor: .darkGray, fontSize: 13)
+        case 2:
+            popularButton.backgroundColor = .black
+            popularButton.setTitleColor(.white, for: .normal)
+            toBeReleasedButton.backgroundColor = .black
+            toBeReleasedButton.setTitleColor(.white, for: .normal)
+            labelUiDesign(labelName: firstResultLabel, labelText: "조금만 기다려주세요!", textColor: .white, fontSize: 25)
+            labelUiDesign(labelName: secondResultLabel, labelText: "다른 영화, 시리즈, 배우 , 감독 또는 장르를 검색해보세요.", textColor: .darkGray, fontSize: 13)
+        default:
+            return
+        }
+        
+        
+    }
     
+    
+    
+    
+    
+    func buttonUiDesign(buttonName:UIButton, imageName image:String, buttonTitleColor color:UIColor, buttonHighlightedColor hlcolor:UIColor, buttonTitle title:String ) {
+        buttonName.setImage(UIImage(named: image), for: .normal)
+        buttonName.setTitleColor(color, for: .normal)
+        buttonName.backgroundColor = .white
+        buttonName.titleLabel?.font = .boldSystemFont(ofSize: 12)
+        buttonName.layer.cornerRadius = 10
+        buttonName.setTitle(title, for: .normal)
+    }
+    func labelUiDesign(labelName:UILabel, labelText text:String, textColor color:UIColor, fontSize size: Int) {
+        labelName.text =
+        "\(text)"
+        labelName.textColor = color
+        labelName.font = .systemFont(ofSize: CGFloat(size))
+        labelName.textAlignment = .center
+    }
+    func textFieldUiDesign(textFieldName:UITextField, textFieldBackgroundColor color:UIColor, placeholderTextColor textColor:UIColor, placehorderText text:String) {
+        textFieldName.backgroundColor = color
+        textFieldName.textColor = textColor
+        textFieldName.attributedPlaceholder = NSAttributedString(string: "\(text)", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+    }
 
 }
