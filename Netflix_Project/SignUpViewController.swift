@@ -9,14 +9,17 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var idTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
     @IBOutlet var nicknameTextField: UITextField!
     
-    @IBOutlet var promoCode: UITextField!
+    @IBOutlet var promoCodeTextField: UITextField!
     
-    @IBOutlet var freeButton: UIButton!
+    
+    @IBOutlet var locationTextField: UITextField!
     
     @IBOutlet var signUpButton: UIButton!
     
@@ -27,46 +30,59 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        idTextField.placeholder = "이메일 주소 또는 전화번호"
-        idTextField.textColor = UIColor.white
-        idTextField.backgroundColor = UIColor.lightGray
+        backgroundView.backgroundColor = .black
+        textFieldUiInitialize()
+        buttonUiInitialize()
+        switchUiDesign()
+    }
+    func labeUiDesign(titleName:UILabel, titleText text:String, titleColor:UIColor, titleFontSize size:Int) {
+        titleName.text = text
+        titleName.tintColor = titleColor
+        titleName.textAlignment = .center
+        titleName.font = UIFont.systemFont(ofSize: CGFloat(size))
+    }
+    func textFieldUiDesign(textFieldName:UITextField, placehorderText:String, textFieldtextColor:UIColor, textAlignment:NSTextAlignment, placehorderTextcolor:UIColor,  backgroundColor:UIColor, isSecureText:Bool) {
+        textFieldName.textColor = textFieldtextColor
+        textFieldName.textAlignment = textAlignment
+        textFieldName.attributedPlaceholder = NSAttributedString(
+            string: placehorderText, attributes: [NSAttributedString.Key.foregroundColor: placehorderTextcolor])
+        textFieldName.backgroundColor = backgroundColor
+        textFieldName.isSecureTextEntry = isSecureText
+        textFieldName.font = UIFont.systemFont(ofSize: 12)
         
-        passwordTextField.placeholder = "비밀번호"
-        passwordTextField.textColor = UIColor.white
-        passwordTextField.backgroundColor = UIColor.lightGray
-        passwordTextField.isSecureTextEntry = true
-        
-        nicknameTextField.placeholder = "닉네임"
-        nicknameTextField.textColor = UIColor.white
-        nicknameTextField.backgroundColor = UIColor.lightGray
-        
-        promoCode.placeholder = "추천 코드"
-        promoCode.textColor = UIColor.white
-        promoCode.backgroundColor = UIColor.lightGray
-        
-        nicknameTextField.placeholder = "닉네임"
-        nicknameTextField.textColor = UIColor.white
-        nicknameTextField.backgroundColor = UIColor.lightGray
-        
-        
-        freeButton.setTitle("30분 둘러보기", for: .normal)
-        freeButton.backgroundColor = UIColor.lightGray
-        freeButton.setTitleColor(UIColor.white, for: .normal)
-        freeButton.layer.cornerRadius = 7
-        
-        signUpButton.setTitle("회원가입", for: .normal)
-        signUpButton.backgroundColor = UIColor.white
-        signUpButton.setTitleColor(UIColor.black, for: .normal)
-        signUpButton.layer.cornerRadius = 7
-        
-        moreInformationButton.setTitle("추가정보 입력", for: .normal)
-        moreInformationButton.setTitleColor(UIColor.white, for: .normal)
-        moreInformationButton.layer.cornerRadius = 7
     }
     
+    func buttonUiDeisign(buttonName name:UIButton, buttonTitle:String, buttonTitleColor titleColor:UIColor, buttonBackgroundColor color:UIColor) {
+        name.setTitle(buttonTitle, for: .normal)
+        name.backgroundColor = color
+        name.setTitleColor(titleColor, for: .normal)
+        name.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        name.layer.cornerRadius = 7
+    }
+    
+    func switchUiDesign() {
+        signUpViewSwtich.onTintColor = UIColor.green
+        signUpViewSwtich.thumbTintColor = UIColor.white
+    }
+    
+    func textFieldUiInitialize() {
+        textFieldUiDesign(textFieldName: idTextField , placehorderText: "이메일 주소 또는 전화번호", textFieldtextColor: .white, textAlignment: .center, placehorderTextcolor: .white, backgroundColor: .lightGray, isSecureText: false)
+        textFieldUiDesign(textFieldName: passwordTextField, placehorderText: "비밀번호", textFieldtextColor: .white, textAlignment: .center, placehorderTextcolor: .white, backgroundColor: .lightGray, isSecureText: true)
+        textFieldUiDesign(textFieldName: nicknameTextField, placehorderText: "닉네임", textFieldtextColor: .white, textAlignment: .center, placehorderTextcolor: .white, backgroundColor: .lightGray, isSecureText: false)
+        textFieldUiDesign(textFieldName: locationTextField, placehorderText: "위치", textFieldtextColor: .white, textAlignment: .center, placehorderTextcolor: .white, backgroundColor: .lightGray, isSecureText: false)
+        textFieldUiDesign(textFieldName: promoCodeTextField, placehorderText: "추천 코드 입력", textFieldtextColor: .white, textAlignment: .center, placehorderTextcolor: .white, backgroundColor: .lightGray, isSecureText: false)
+        textFieldUiDesign(textFieldName: nicknameTextField, placehorderText: "닉네임", textFieldtextColor: .white, textAlignment: .center, placehorderTextcolor: .white, backgroundColor: .lightGray, isSecureText: false)
+    }
+    func buttonUiInitialize() {
+        buttonUiDeisign(buttonName: signUpButton, buttonTitle: "회원가입", buttonTitleColor: .black, buttonBackgroundColor: .white)
+        buttonUiDeisign(buttonName: moreInformationButton, buttonTitle: "추가정보 입력", buttonTitleColor: .white, buttonBackgroundColor: .black)
+    }
+    func labelUiInitialize() {
+        labeUiDesign(titleName: titleLabel, titleText: "YUNFLIX", titleColor: .red, titleFontSize: 40)
+        
+    }
+}
 
-    }
-    
-   
+
 
 

@@ -40,16 +40,12 @@ class NewHotViewController: UIViewController {
         newHotView.backgroundColor = .black
         
         
-        labelUiDesign(labelName: titleLabel, labelText: "NEW & HOT 검색", textColor: .white, fontSize: 30)
-        
-        labelUiDesign(labelName: firstResultLabel, labelText: "이런! 찾으시는 작품이 없습니다.", textColor: .white, fontSize: 25)
-        labelUiDesign(labelName: secondResultLabel, labelText: "다른 영화, 시리즈, 배우 , 감독 또는 장르를 검색해보세요.", textColor: .darkGray, fontSize: 13)
-        
+       
+        labelUiInitialize()
+        buttonUiInitialize()
         textFieldUiDesign(textFieldName: searchTextField, textFieldBackgroundColor: .darkGray, placeholderTextColor: .white, placehorderText: "게임, 시리즈, 영화를 검색하세요.")
         
-        buttonUiDesign(buttonName: toBeReleasedButton, imageName: "blue", buttonTitleColor: UIColor.black, buttonHighlightedColor: .black, buttonTitle: "공개 예정")
-        buttonUiDesign(buttonName: popularButton, imageName: "turquoise", buttonTitleColor: UIColor.black, buttonHighlightedColor: .black, buttonTitle: "모두의 인기 콘텐츠")
-        buttonUiDesign(buttonName: topSeriesButton, imageName: "pink", buttonTitleColor: UIColor.black, buttonHighlightedColor: .black, buttonTitle: "TOP 10 시리즈")
+     
 
         
     }
@@ -58,7 +54,8 @@ class NewHotViewController: UIViewController {
         
         switch sender.tag {
         case 0:
-            
+            toBeReleasedButton.backgroundColor = .white
+            toBeReleasedButton.setTitleColor(.black, for: .normal)
             popularButton.backgroundColor = .black
             popularButton.setTitleColor(.white, for: .normal)
             topSeriesButton.backgroundColor = .black
@@ -68,6 +65,8 @@ class NewHotViewController: UIViewController {
             toBeReleasedButton.setTitleColor(.white, for: .normal)
             topSeriesButton.backgroundColor = .black
             topSeriesButton.setTitleColor(.white, for: .normal)
+            popularButton.backgroundColor = .white
+            popularButton.setTitleColor(.black, for: .normal)
             labelUiDesign(labelName: firstResultLabel, labelText: "준비중입니다!", textColor: .white, fontSize: 25)
             labelUiDesign(labelName: secondResultLabel, labelText: "다른 영화, 시리즈, 배우 , 감독 또는 장르를 검색해보세요.", textColor: .darkGray, fontSize: 13)
         case 2:
@@ -75,6 +74,8 @@ class NewHotViewController: UIViewController {
             popularButton.setTitleColor(.white, for: .normal)
             toBeReleasedButton.backgroundColor = .black
             toBeReleasedButton.setTitleColor(.white, for: .normal)
+            topSeriesButton.backgroundColor = .white
+            topSeriesButton.setTitleColor(.black, for: .normal)
             labelUiDesign(labelName: firstResultLabel, labelText: "조금만 기다려주세요!", textColor: .white, fontSize: 25)
             labelUiDesign(labelName: secondResultLabel, labelText: "다른 영화, 시리즈, 배우 , 감독 또는 장르를 검색해보세요.", textColor: .darkGray, fontSize: 13)
         default:
@@ -84,14 +85,25 @@ class NewHotViewController: UIViewController {
         
     }
     
+    func buttonUiInitialize() {
+        buttonUiDesign(buttonName: toBeReleasedButton, imageName: "blue", buttonTitleColor: UIColor.black, buttonTitle: "공개 예정", backgourndColor: .white)
+        buttonUiDesign(buttonName: popularButton, imageName: "turquoise", buttonTitleColor: UIColor.white, buttonTitle: "모두의 인기 콘텐츠", backgourndColor: .black)
+        buttonUiDesign(buttonName: topSeriesButton, imageName: "pink", buttonTitleColor: UIColor.white, buttonTitle: "TOP 10 시리즈", backgourndColor: .black)
+        
+    }
+    
+    func labelUiInitialize() {
+        labelUiDesign(labelName: titleLabel, labelText: "NEW & HOT 검색", textColor: .white, fontSize: 30)
+        
+        labelUiDesign(labelName: firstResultLabel, labelText: "이런! 찾으시는 작품이 없습니다.", textColor: .white, fontSize: 25)
+        labelUiDesign(labelName: secondResultLabel, labelText: "다른 영화, 시리즈, 배우 , 감독 또는 장르를 검색해보세요.", textColor: .darkGray, fontSize: 13)
+    }
     
     
-    
-    
-    func buttonUiDesign(buttonName:UIButton, imageName image:String, buttonTitleColor color:UIColor, buttonHighlightedColor hlcolor:UIColor, buttonTitle title:String ) {
+    func buttonUiDesign(buttonName:UIButton, imageName image:String, buttonTitleColor color:UIColor, buttonTitle title:String, backgourndColor bgColor:UIColor) {
         buttonName.setImage(UIImage(named: image), for: .normal)
         buttonName.setTitleColor(color, for: .normal)
-        buttonName.backgroundColor = .white
+        buttonName.backgroundColor = bgColor
         buttonName.titleLabel?.font = .boldSystemFont(ofSize: 12)
         buttonName.layer.cornerRadius = 10
         buttonName.setTitle(title, for: .normal)
